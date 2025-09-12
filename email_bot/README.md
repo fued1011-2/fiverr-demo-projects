@@ -23,13 +23,13 @@ This project is an **AI-powered Gmail assistant** that automatically:
 
 ### 1. Clone Repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/fued1011-2/fiverr-demo-projects.git
 cd email_bot
 ```
 
 ### 2. Install Dependencies
 ```bash
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 ```
 
 ### 3. Google Cloud Setup
