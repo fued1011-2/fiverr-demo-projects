@@ -47,7 +47,7 @@ setx HF_API_KEY "hf_xxxxxxxx"   # Windows PowerShell
 
 ---
 
-##Usage
+## Usage
 
 ### 1. From another e-mail account, send a test email to your bot’s Gmail address.
 
