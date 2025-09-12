@@ -12,9 +12,9 @@ pip install -r ../requirements.txt
 ## Usage
 
 ``` bash
-python api__demo.py
+python api_integration.py
 ```
 
 ## Output
-  weather.csv
 
+weather.csv
