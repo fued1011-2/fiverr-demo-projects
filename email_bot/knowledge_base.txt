@@ -1,0 +1,11 @@
+Q: What are your business hours?
+A: We are open Mon–Fri, 9am–5pm.
+
+Q: Where are you located?
+A: Our main office is in Berlin, Germany.
+
+Q: What services do you provide?
+A: Python automation, web scraping, and AI integrations.
+
+Q: Do you offer email automation?
+A: Yes, we build custom Gmail and Outlook bots with AI support.

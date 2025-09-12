@@ -22,6 +22,15 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 HISTORY_FILE = Path("email_history.json")
 
+
+def load_knowledge_base():
+    try:
+        with open("knowledge_base.txt", "r", encoding="utf-8") as f:
+            return f.read()
+    except FileNotFoundError:
+        return ""
+
+
 def _load_history():
     try:
         return json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
@@ -30,16 +39,19 @@ def _load_history():
     except Exception:
         return {}
 
+
 def _save_history(history: dict):
     HISTORY_FILE.write_text(
         json.dumps(history, indent=2, ensure_ascii=False), encoding="utf-8"
     )
+
 
 def append_history(thread_id: str, role: str, text: str):
     """role: 'user' oder 'assistant'"""
     h = _load_history()
     h.setdefault(thread_id, []).append({"role": role, "text": text})
     _save_history(h)
+
 
 def get_history_text(thread_id: str, max_turns: int = 6) -> str:
     """Gibt die letzten N Turns formatiert zurück."""
@@ -96,16 +108,21 @@ def get_latest_email(service):
     return subject, sender, body, thread_id, msg['id']
 
 
-def create_ai_response(subject, body, history_text=""):
+def create_ai_response(subject, body, history_text="", knowledge=""):
     prompt = f"""
-        You are an AI email assistant. Write a short, polite and professional reply.
+        You are an AI email assistant. Use the following context when answering.
 
         Conversation so far (most recent first):
         {history_text or "(no prior messages)"}
 
+        Company knowledge base:
+        {knowledge or "(no extra knowledge provided)"}
+
         New email:
         Subject: {subject}
         Message: {body}
+
+        Write a short, polite and professional reply.
     """
     response = model.generate_content(prompt)
     return response.text
@@ -157,7 +174,8 @@ if __name__ == '__main__':
         print("🤖 History Text:\n", history_text)
 
         # 2) Antwort generieren (mit History)
-        ai_reply = create_ai_response(subject, body, history_text)
+        knowledge = load_knowledge_base()
+        ai_reply = create_ai_response(subject, body, history_text, knowledge)
         print("🤖 KI Antwort:\n", ai_reply)
 
         # 3) Verlauf aktualisieren
