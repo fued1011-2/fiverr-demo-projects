@@ -56,3 +56,8 @@ Desktop.ini
 # Local data
 *.sqlite3
 *.db
+
+# E-Mail Bot
+credentials.json
+token.pickle
+email_history.json
