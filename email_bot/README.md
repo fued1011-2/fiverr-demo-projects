@@ -45,10 +45,22 @@ export HF_API_KEY=hf_xxxxxxxx   # Linux/Mac
 setx HF_API_KEY "hf_xxxxxxxx"   # Windows PowerShell
 ```
 
-### 5. Run the Bot
+---
+
+##Usage
+
+### 1. From another e-mail account, send a test email to your bot’s Gmail address.
+
+### 2. Run the Bot
 ```bash
 python email_bot.py
 ```
+
+### 3. The bot will:
+- Read the latest incoming email.
+- Generate a response with AI.
+- Send the reply back to the sender.
+- Label the message as AI_Replied.
 
 ---
 
