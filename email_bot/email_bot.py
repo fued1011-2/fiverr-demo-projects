@@ -67,8 +67,12 @@ def get_gmail_service():
 
 def get_latest_email(service):
     results = service.users().messages().list(
-        userId='me', maxResults=1, labelIds=['INBOX']
+        userId='me',
+        maxResults=1,
+        labelIds=['INBOX'],
+        q="-label:AI_Replied"
     ).execute()
+
     messages = results.get('messages', [])
     if not messages:
         return None
@@ -89,8 +93,7 @@ def get_latest_email(service):
     else:
         body = "(Kein Textinhalt gefunden)"
 
-    return subject, sender, body, thread_id
-
+    return subject, sender, body, thread_id, msg['id']
 
 
 def create_ai_response(subject, body, history_text=""):
@@ -117,6 +120,27 @@ def send_email(service, to, subject, body_text):
     service.users().messages().send(userId="me", body={'raw': raw}).execute()
 
 
+def add_label(service, msg_id, label_name="AI_Replied"):
+    labels = service.users().labels().list(userId='me').execute()
+    label_id = None
+    for lbl in labels['labels']:
+        if lbl['name'] == label_name:
+            label_id = lbl['id']
+            break
+
+    if not label_id:
+        # Label erstellen
+        label = {'name': label_name, 'labelListVisibility': 'labelShow', 'messageListVisibility': 'show'}
+        new_label = service.users().labels().create(userId='me', body=label).execute()
+        label_id = new_label['id']
+
+    service.users().messages().modify(
+        userId='me',
+        id=msg_id,
+        body={'addLabelIds': [label_id]}
+    ).execute()
+
+
 # -------------------------------
 # MAIN
 # -------------------------------
@@ -124,11 +148,13 @@ if __name__ == '__main__':
     service = get_gmail_service()
     latest = get_latest_email(service)
     if latest:
-        subject, sender, body, thread_id = latest
+        subject, sender, body, thread_id, msg_id = latest
         print("📩 Neue Mail:", subject, sender)
 
         # 1) Bisherige History für diesen Thread holen
         history_text = get_history_text(thread_id)
+
+        print("🤖 History Text:\n", history_text)
 
         # 2) Antwort generieren (mit History)
         ai_reply = create_ai_response(subject, body, history_text)
@@ -139,7 +165,8 @@ if __name__ == '__main__':
         append_history(thread_id, "assistant", ai_reply)
 
         # 4) Senden (optional – zum Testen lieber erstmal auslassen)
-        # send_email(service, sender, subject, ai_reply)
+        send_email(service, sender, subject, ai_reply)
+        add_label(service, msg_id, "AI_Replied")
         print("⚠️ Demo-Modus: E-Mail NICHT gesendet. (send_email() auskommentiert)")
     else:
         print("Keine neuen Mails gefunden.")
