@@ -6,13 +6,13 @@ Fetches hourly temperature data from the free Open-Meteo API and saves it to a C
 
 From the repo root run:
 ``` bash
-    pip install -r ../requirements.txt
+pip install -r ../requirements.txt
 ```
 
 ## Usage
 
 ``` bash
-  python api__demo.py
+python api__demo.py
 ```
 
 ## Output
