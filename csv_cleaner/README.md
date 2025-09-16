@@ -5,11 +5,20 @@ A simple Python script that:
 - Drops empty columns
 - Saves cleaned data to CSV/Excel
 
-Usage:
-  Place your input file as 'input.csv' in this folder, then run:
-    python csv_cleaner.py
-  The cleaned output will be saved as 'output_clean.csv'.
+## Setup
 
-Requirements:
-  From the repo root run:
-    pip install -r ../requirements.txt
+From the repo root run:
+``` bash
+pip install -r ../requirements.txt
+```
+
+## Usage
+
+Place your input file as 'input.csv' in this folder, then run:
+``` bash
+python csv_cleaner.py
+```
+
+## Output
+
+output_clean.csv

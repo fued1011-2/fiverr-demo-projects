@@ -2,11 +2,19 @@
 
 Fetches hourly temperature data from the free Open-Meteo API and saves it to a CSV file.
 
-Usage:
-  python api_integration_demo.py
-Output:
-  weather.csv
+## Setup
 
-Requirements:
-  From the repo root run:
-    pip install -r ../requirements.txt
+From the repo root run:
+``` bash
+pip install -r ../requirements.txt
+```
+
+## Usage
+
+``` bash
+python api_integration.py
+```
+
+## Output
+
+weather.csv

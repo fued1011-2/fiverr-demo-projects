@@ -2,11 +2,19 @@
 
 Scrapes quotes and their authors from https://quotes.toscrape.com and saves the results to a CSV file.
 
-Usage:
-  python web_scraper_demo.py
-Output:
-  quotes.csv
+## Setup
 
-Requirements:
-  From the repo root run:
-    pip install -r ../requirements.txt
+From the repo root run:
+``` bash
+pip install -r ../requirements.txt
+```
+
+## Usage
+
+``` bash
+python web_scraper.py
+```
+
+## Output
+
+quotes.csv
