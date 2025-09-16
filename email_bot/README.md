@@ -75,20 +75,53 @@ email_bot/
 
 ## Example Run
 ```
-🧵 Thread-ID: 1993e75da32c3088
+PS D:\fiverr-demo-projects\email_bot> python email_bot.py
+🧵 Thread-ID: 1995318683d23afe
 
-📩 New Email: Interested in gig fuchs_edgar@web.de
+
+📨 Thread 1995318683d23afe has 3 messages.
+   1. John_Doe@gmail.com – Interested in gig
+   2. Doe_John@gmail.com – Re: Interested in gig
+   3. John_Doe@gmail.com – Re: Interested in gig
+
 
 🤖 History Text:
+ From: John_Doe@gmail.com
+Subject: Interested in gig
+Message: Hello,
+
+I am interested in a Gig. Where are you located?
+
+Sincerely,
+John Doe
+
+
+From: Doe_John@gmail.com
+Subject: Re: Interested in gig
+Message: Hello Dear John Doe,
+
+Thank you for your interest in our services. Our main office is located in Berlin, Germany, but we work remotely with clients from all over the world. We can assist you remotely and collaborate via email or video conferencing. Which services from our profile have piqued your interest?
+
+Sincerely,
+Doe John
+
+
+📩 New Email: Re: Interested in gig John_Doe@gmail.com Hello,
+
+Thanks for the reply. What kind of services do you offer?
+
+Sincerely,
+John Doe
+
 
 
 🤖 AI Reply:
-Hello Dear Matt,
+ Hello Dear John Doe,
 
-Thank you for your interest in our services. I offer custom solutions in Python automation, web scraping, and AI integrations tailored to meet the specific needs of each project. If you could provide more details about your requirements, I would be happy to assist you further.
+Our services include Python automation, web scraping, and integrating AI models into existing systems. We also offer custom email automation and bot development, using AI support for Gmail and Outlook. We'd be happy to discuss how we can help you achieve your goals.
 
 Sincerely,
-Edgar Fuchs
+Doe John
 ```
 
 ---
